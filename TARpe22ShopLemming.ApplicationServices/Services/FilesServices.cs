@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TARpe22ShopLemming.Core.Domain;
-using TARpe22ShopLemming.Core.Dto;
 using TARpe22ShopLemming.Data;
 
 namespace TARpe22ShopLemming.ApplicationServices.Services
@@ -77,6 +76,7 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
                     string uploadsFolder = Path.Combine(_webHost.WebRootPath, "multipleFileUpload");
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         image.CopyTo(fileStream);

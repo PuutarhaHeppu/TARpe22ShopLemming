@@ -12,5 +12,7 @@ namespace TARpe22ShopLemming.Data
     {
         public TARpe22ShopLemmingContext(DbContextOptions<TARpe22ShopLemmingContext> options) : base(options) { }
         public DbSet<Spaceship> Spaceships { get; set; }
+        public DbSet<FileToDatabase> FileToDatabases { get; set; }
+        public DbSet<>
     }
 }

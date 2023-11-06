@@ -9,6 +9,7 @@ using TARpe22ShopLemming.Core.Dto;
 using TARpe22ShopLemming.Core.ServiceInterface;
 using TARpe22ShopLemming.Data;
 using TARpe22ShopLemming.ApplicationServices.Services;
+using TARpe22ShopLemming.Core.Domain;
 
 namespace TARpe22ShopLemming.ApplicationServices.Services
 {
@@ -17,7 +18,7 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
         private readonly TARpe22ShopLemmingContext _context;
         private readonly IFilesServices _filesServices;
         public RealEstatesServices
-        (
+            (
             TARpe22ShopLemmingContext context,
             IFilesServices filesServices
             )

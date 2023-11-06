@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TARpe22ShopLemming.Core\TARpe22ShopLemming.Core.csproj" />
+    <ProjectReference Include="..\TARpe22ShopLemming.Data\TARpe22ShopLemming.Data.csproj" />
+  </ItemGroup>
+
 </Project>
