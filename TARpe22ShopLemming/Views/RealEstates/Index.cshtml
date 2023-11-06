@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TARpe22ShopLemming.Models.RealEstate.RealEstateIndexViewModel>
+@{
+    int rowNumber = 1;
+}
+<div class="h1">Real Estates</div>
+<div>
+    <a asp-action="create" asp-controller="realEstates" type="submit" class="btn-primary">Create</a>
+</div>
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Location</th>
+                <th scope="col">SquareMeters</th>
+                <th scope="col">RoomCount</th>
+                <th scope="col">Price</th>
+                <th scope="col">IsPropertySold</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var realEstates in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@realEstates.Location</td>
+                    <td>@realEstates.SquareMeters</td>
+                    <td>@realEstates.RoomCount</td>
+                    <td>@realEstates.Price</td>
+                    <td>@realEstates.IsPropertySold</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="realEstates.Id" class="btn btn-info">Details</a>
+                        <a asp-action="update" asp-route-id="realEstates.Id" class="btn btn-info">Details</a>
+                        <a asp-action="delete" asp-route-id="realEstates.Id" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</for>
