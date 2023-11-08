@@ -11,8 +11,8 @@ namespace TARpe22ShopLemming.Core.ServiceInterface
     public interface ISpaceshipServices
     {
         void UploadFilesToDatabase(SpaceshipDto dto, Spaceship domain);
-        Task<FileToDatabase> RemoveImage(FileDatabaseDto dto);
-        Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos();
+        Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto);
+        Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto dtos);
 
     }
 }

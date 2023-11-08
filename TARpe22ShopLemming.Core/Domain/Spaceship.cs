@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TARpe22ShopLemming.Core.Domain
 {
-    internal class Spaceship
+    public class Spaceship
     {
         [Key]
-        public Guid ID { get; set; } // unique id
+        public Guid Id { get; set; } // unique id
         public int Price { get; set; } // price
         public string Type { get; set; } // Spaceship Type [rocket, saucer, cruise ship, cargoship]
         public string Name { get; set; } // Name of the ship
