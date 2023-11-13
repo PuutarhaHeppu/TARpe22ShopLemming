@@ -106,7 +106,7 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
             _context.Spaceships.Remove(spaceshipId);
             await _context.SaveChangesAsync();
-            var images = await _context.FilesToDatabase
+            var images = await _context.FileToDatabases
                 .Where(x => x.SpaceshipId == id)
                 .Select(y => new FileToDatabaseDto
                 {

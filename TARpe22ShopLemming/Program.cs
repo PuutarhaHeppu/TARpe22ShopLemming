@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TARpe22ShopLemming.ApplicationServices.Services;
+using TARpe22ShopLemming.Core.ServiceInterface;
 using TARpe22ShopLemming.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TARpe22ShopLemmingContext>(OptionsBuilderConfigurationExtensions => OptionsBuilderConfigurationExtensions.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<ISpaceshipservices, SpaceshipsServices>();
+builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
+builder.Services.AddScoped<IFilesServices, FilesServices>();
+builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,7 +33,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapRazorPages();
 
 app.Run();

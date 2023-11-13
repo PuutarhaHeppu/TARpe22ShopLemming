@@ -27,7 +27,7 @@ namespace TARpe22ShopLemming.Models.RealEstate
         public bool DoesHaveSwimmingPool { get; set; }
         public DateTime? BuiltAt { get; set; }
         public List<IFormFile> Files { get; set; } //files associated with the obj
-        public List<FileToApi> FilesToApiViewModels { get; set; }
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; } = new List<FileToApiViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }

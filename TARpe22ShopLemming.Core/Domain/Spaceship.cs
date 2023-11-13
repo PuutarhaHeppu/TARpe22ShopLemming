@@ -10,29 +10,30 @@ namespace TARpe22ShopLemming.Core.Domain
     public class Spaceship
     {
         [Key]
-        public Guid Id { get; set; } // unique id
-        public int Price { get; set; } // price
-        public string Type { get; set; } // Spaceship Type [rocket, saucer, cruise ship, cargoship]
-        public string Name { get; set; } // Name of the ship
-        public string Description { get; set; } // Description for ship
-        public string FuelType { get; set; } // Fuel Type
-        public int FuelCapacity { get; set; } // Max fuel
-        public int FuelConsumption { get; set; } // fuel consumption
-        public int PassengerCount { get; set; } // Seat count
-        public int EnginePower { get; set; } // Engine power in kWh
-        public bool DoesHaveAutoPilot { get; set; } // if have autopilot True or False
-        public int CrewCount { get; set; } // How many Crewmembers
-        public int CargoWeight { get; set; } // how much cargo can this shit hold
-        public bool DoesHaveLifeSupportSystems { get; set; } // if has life support systems
-        public DateTime BuiltAt { get; set; } // when was the ship built
-        public DateTime LastMaintenence { get; set; } // when was the ship last maintained
-        public int MaintenenceCount { get; set; } // how many times maintenence count
-        public int FullTripCount { get; set; } // how many voyages has this ship gone through
-        public DateTime MaidenLaunch { get; set; } // when did the ship first take its voyage
-        public string ManuFacturer { get; set; } // who manufactored the spaceship
+        public Guid Id { get; set; } //unique id
+        public int Price { get; set; } //price of the spaceship
+        public string Type { get; set; } //spaceship type [Rocket, Saucer, Cruise ship, Cargoship]
+        public string Name { get; set; } //name of the ship not build make or model
+        public string Description { get; set; } //description of the ship, containing any info not covered by any of the other fields
+        public string FuelType { get; set; } //what type of fuel does the spaceship use
+        public int FuelCapacity { get; set; } //how much fuel it can hold
+        public int FuelConsumption { get; set; } //how much fuel the ship consumes per day on average
+        public int PassengerCount { get; set; } //how many passengers fit the ship
+        public int EnginePower { get; set; } //how powerful the engine is in kWh
+        public bool DoesHaveAutopilot { get; set; } //does the ship have automatic piloting feature
+        public int CrewCount { get; set; } //how many people does it take to man the ship
+        public int CargoWeight { get; set; } //how much cargo can the ship transport
+        public bool DoesHaveLifeSupportSystems { get; set; } //does the ship have life support systems
+        public DateTime BuiltDate { get; set; } // when as the ship built at
+        public DateTime LastMaintenance { get; set; } //when was the ship last maintained at
+        public int MaintenanceCount { get; set; } //how many maintenance sessions has been performed on the ship
+        public int FullTripsCount { get; set; } //how many voyages the ship has gone through
+        public DateTime MaidenLaunch { get; set; } //when did the ship take its first voyage
+        public string Manufacturer { get; set; } //who manufactured the spaceship
 
-        // database info, not for customer
-        public DateTime CreatedAt { get; set; } //When was the entry created
-        public DateTime ModifiedAt { get; set; } //When was the entry last modified
+        //database info only, do not display to user
+
+        public DateTime CreatedAt { get; set; } //when was the entry created into the database
+        public DateTime ModifiedAt { get; set; } //when the entry was last modified at
     }
 }

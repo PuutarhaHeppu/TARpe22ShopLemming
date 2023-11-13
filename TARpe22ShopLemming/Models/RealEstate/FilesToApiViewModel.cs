@@ -1,6 +1,6 @@
 ﻿namespace TARpe22ShopLemming.Models.RealEstate
 {
-    public class FilesToApiViewModel
+    public class FileToApiViewModel
     {
         public Guid ImageId { get; set; }   
         public string FilePath { get; set; }
