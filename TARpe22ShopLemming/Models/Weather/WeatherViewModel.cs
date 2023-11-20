@@ -1,4 +1,4 @@
-﻿using TARpe22ShopLemming.Core.Dto.WeatherDto;
+﻿using TARpe22ShopLemming.Core.Dto.WeatherDtos;
 
 namespace TARpe22ShopLemming.Models.Weather
 {
@@ -6,11 +6,27 @@ namespace TARpe22ShopLemming.Models.Weather
     {
         public DateTime Date { get; set; }
         public int EpochDate { get; set; }
-        public Temperatures Temperature { get; set; }
-        public DayNightCycles DayNightCycles { get; set; }
-        public List<string> Sources { get; set; }
+        public int Severity { get; set; }
+        public string Text { get; set; }
+        public string Category { get; set; }
         public string MobileLink { get; set; }
         public string Link { get; set; }
+        public double TempMinValue { get; set; }
+        public string TempMinUnit { get; set; }
+        public int TempMinUnitType { get; set; }
+        public double TempMaxValue { get; set; }
+        public string TempMaxUnit { get; set; }
+        public int TempMaxUnitType { get; set; }
+        public int DayIcon { get; set; }
+        public string DayIconPhrase { get; set; }
+        public bool DayHasPrecipitation { get; set; }
+        public string DayPrecipitationType { get; set; }
+        public string DayPrecipitationIntensity { get; set; }
+        public int NightIcon { get; set; }
+        public string NightIconPhrase { get; set; }
+        public bool NightHasPrecipitation { get; set; }
+        public string NightPrecipitationType { get; set; }
+        public string NightPrecipitationIntensity { get; set; }
     }
 
     public class Temperatures
@@ -18,6 +34,7 @@ namespace TARpe22ShopLemming.Models.Weather
         public Temperature Minimum { get; set; }
         public Temperature Maximum { get; set; }
     }
+
     public class DayNightCycles
     {
         public int Icon { get; set; }

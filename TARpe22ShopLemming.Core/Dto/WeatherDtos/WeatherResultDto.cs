@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TARpe22ShopLemming.Core.Dto.WeatherDto
+namespace TARpe22ShopLemming.Core.Dto.WeatherDtos
 {
     public class WeatherResultDto
     {
         public bool DayHasPrecipitation;
-        public int EffectiveEpochDate { get; set; }
         public DateTime EffectiveDate { get; set; }
+        public int EffectiveEpochDate { get; set; }
         public int Severity { get; set; }
         public string Text { get; set; }
         public string Category { get; set; }
         public DateTime EndDate { get; set; }
         public int EndEpochDate { get; set; }
 
-        public DateTime DailyForecasts { get; set; }
-        public string DailyForecastsEpochDate { get; set; } 
-        
         public string MobileLink { get; set; }
         public string Link { get; set; }
+
+        public DateTime DailyForecastsDay { get; set; }
+        public int DailyForecastsEpochDate { get; set; }
 
         public double TempMinValue { get; set; }
         public string TempMinUnit { get; set; }
@@ -34,13 +34,14 @@ namespace TARpe22ShopLemming.Core.Dto.WeatherDto
         public int DayIcon { get; set; }
         public bool DayHasPercipitation { get; set; }
         public string DayIconPhrase { get; set; }
-        public string DayPercipitationType { get; set; }
-        public string DayPercipitationIntesity { get; set;}
+        public string DayPrecipitationType { get; set; }
+        public string DayPrecipitationIntensity { get; set; }
 
         public int NightIcon { get; set; }
-        public bool NightHasPercipitation { get; set; }
+        public bool NightHasPrecipitation { get; set; }
         public string NightIconPhrase { get; set; }
-        public string NightPercipitationType { get; set; }
-        public string NightPercipitationIntesity { get; set;}
+        public string NightPrecipitationType { get; set; }
+        public string NightPrecipitationIntensity { get; set; }
+
     }
 }
