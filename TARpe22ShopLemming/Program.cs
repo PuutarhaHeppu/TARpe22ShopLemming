@@ -12,6 +12,7 @@ builder.Services.AddDbContext<TARpe22ShopLemmingContext>(OptionsBuilderConfigura
 builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 builder.Services.AddScoped<IFilesServices, FilesServices>();
 builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
+builder.Services.AddScoped<IWeatherForecastsServices, WeatherForecastServices>();
 
 var app = builder.Build();
 
