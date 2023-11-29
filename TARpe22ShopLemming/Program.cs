@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NETCore.MailKit.Core;
 using TARpe22ShopLemming.ApplicationServices.Services;
 using TARpe22ShopLemming.Core.ServiceInterface;
 using TARpe22ShopLemming.Data;
@@ -13,6 +14,7 @@ builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 builder.Services.AddScoped<IFilesServices, FilesServices>();
 builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
 builder.Services.AddScoped<IWeatherForecastsServices, WeatherForecastServices>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
