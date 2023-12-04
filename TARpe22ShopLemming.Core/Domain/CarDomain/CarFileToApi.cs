@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TARpe22ShopLemming.Core.Dto
+namespace TARpe22ShopLemming.Core.Domain.CarDomain
 {
-    public class FileToApiDto
+    public class CarFileToApi
     {
         public Guid Id { get; set; }
-        public string ExistingFilePath { get; set; }
         public string CarExistingFilePath { get; set; }
         public Guid? CarId { get; set; }
-        public Guid? RealEstateId { get; set; }
     }
 }

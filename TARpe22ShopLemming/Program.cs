@@ -8,7 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TARpe22ShopLemmingContext>(OptionsBuilderConfigurationExtensions => OptionsBuilderConfigurationExtensions.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+<<<<<<< Updated upstream
 builder.Services.AddScoped<ISpaceshipservices, SpaceshipsServices>();
+=======
+builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
+builder.Services.AddScoped<IFilesServices, FilesServices>();
+builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
+builder.Services.AddScoped<IWeatherForecastsServices, WeatherForecastServices>();
+builder.Services.AddScoped<ICarsServices, CarsServices>();
+//builder.Services.AddScoped<IEmailService, EmailService>();
+
+>>>>>>> Stashed changes
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
