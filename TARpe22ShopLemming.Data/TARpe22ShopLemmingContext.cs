@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using TARpe22ShopLemming.Core.Domain;
 
 namespace TARpe22ShopLemming.Data
@@ -15,5 +10,7 @@ namespace TARpe22ShopLemming.Data
         public DbSet<FileToDatabase> FileToDatabases { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<FileToApi> FileToApis { get; set; }
+        public DbSet<CarFileToApi> CarFileToApis { get; set; }
+        public DbSet<Car> Cars { get; set; }
     }
 }

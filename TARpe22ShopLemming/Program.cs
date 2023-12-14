@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NETCore.MailKit.Core;
 using TARpe22ShopLemming.ApplicationServices.Services;
@@ -15,6 +16,7 @@ builder.Services.AddScoped<IFilesServices, FilesServices>();
 builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
 builder.Services.AddScoped<IWeatherForecastsServices, WeatherForecastsServices>();
 builder.Services.AddScoped<IEmailService, EmailServices>();
+builder.Services.AddScoped<ICarsServices, CarsServices>();
 
 var app = builder.Build();
 

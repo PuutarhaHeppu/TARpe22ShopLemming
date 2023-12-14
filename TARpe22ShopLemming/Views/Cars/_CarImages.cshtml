@@ -1,0 +1,8 @@
+﻿@model TARpe22ShopLemming.Models.Car.CarFileToApiViewModel
+@{
+    var photoPaths = "~/multipleFileUpload/" + (Model.CarFilePath ?? "noimage.jpg");
+}
+<div class="form-group row col-sm-4 offset-2">
+    <div>@Model.CarFilePath</div>
+    <img class="card-img-top" src="@photoPaths" asp-append-version="true"/>
+</div>

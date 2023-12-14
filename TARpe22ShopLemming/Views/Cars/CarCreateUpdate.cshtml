@@ -1,0 +1,72 @@
+﻿@model TARpe22ShopLemming.Models.Car.CarCreateUpdateViewModel
+
+<h1>Create</h1>
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="ModifiedAt" type="hidden" />
+
+        <div class="form-group row">
+            <label asp-for="Mark" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Mark" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Model" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Model" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Year" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Year" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="HorsePower" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="HorsePower" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" />
+            </div>
+        </div>
+
+        @foreach (var images in Model.CarFileToApiViewModels)
+        {
+            <partial name="_Images" model="images"/>
+            <input asp-action="removeImage" asp-controller="Cars" asp-route-imageId="@images.>CarImageId" type="submit" class="btn btn-danger" value="Remove Image"/>
+        }
+
+        <input asp-action="create" asp-controller="Cars" type="submit" class="btn btn-primary" value="create" />
+    </form>
+</div>
+
+@section Scripts 
+{
+    <script>
+        $(document).ready(function () {
+            $('custom-file-input').on("change", function()  {
+                var fileLabel = $(this).next('custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ` files selected`);
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

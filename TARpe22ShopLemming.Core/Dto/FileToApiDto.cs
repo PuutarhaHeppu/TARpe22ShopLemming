@@ -12,4 +12,10 @@ namespace TARpe22ShopLemming.Core.Dto
         public string ExistingFilePath { get; set; }
         public Guid? RealEstateId { get; set; }
     }
+    public class CarFileToApiDto
+    {
+        public Guid Id { get; set; }
+        public string CarExistingFilePath { get; set; }
+        public Guid? CarId { get; set; }
+    }
 }

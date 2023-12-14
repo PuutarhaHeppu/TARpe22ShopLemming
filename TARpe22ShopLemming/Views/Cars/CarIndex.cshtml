@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TARpe22ShopLemming.Models.Car.CarIndexViewModel>
+@{
+    int rowNumber = 1;
+}
+<div class="h1">Cars</div>
+<div>
+    <a asp-action="create" asp-controller="Cars" type="submit" class="btn btn-primary">Create</a>
+</div>
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Mark</th>
+                <th scope="col">Model</th>
+                <th scope="col">Year</th>
+                <th scope="col">HorsePower</th>
+                <th scope="col">Name</th>
+                <th scope="col">IsPropertySold</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Car in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@Car.Mark</td>
+                    <td>@Car.Model</td>
+                    <td>@Car.Year</td>
+                    <td>@Car.HorsePower</td>
+                    <td>@Car.Name</td>
+                    <td>
+                        <a asp-action="details" asp-controller="Cars" asp-route-id="@Car.Id" class="btn btn-info">Details</a>
+                        <a asp-action="update" asp-controller="Cars" asp-route-id="@Car.Id" class="btn btn-info">Update</a>
+                        <a asp-action="delete" asp-controller="Cars" asp-route-id="@Car.Id" class="btn btn-info">Delete</a>
+                    </td>
+                </tr>
+                rowNumber += 1;
+            }
+        </tbody>
+    </table>
+</form>

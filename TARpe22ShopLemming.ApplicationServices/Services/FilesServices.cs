@@ -118,5 +118,73 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return null;
         }
+        public void CarFilesToApi(CarDto dto, Car car)
+        {
+            string uniqueFileName = null;
+            if (dto.Files != null && dto.Files.Count > 0)
+            {
+                if (!Directory.Exists(_webHost.WebRootPath + "\\multipleFileUpload\\"))
+                {
+                    Directory.CreateDirectory(_webHost.WebRootPath + "\\multipleFileUpload\\");
+                }
+                foreach (var image in dto.Files)
+                {
+                    string uploadsFolder = Path.Combine(_webHost.WebRootPath, "multipleFileUpload");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        image.CopyTo(fileStream);
+                        CarFileToApi path = new CarFileToApi
+                        {
+                            Id = Guid.NewGuid(),
+                            CarExistingFilePath = uniqueFileName,
+                            CarId = car.Id
+                        };
+                        _context.CarFileToApis.AddAsync(path);
+                    }
+                }
+            }
+        }
+        public async Task<List<CarFileToApi>> CarRemoveImagesFromApi(CarFileToApiDto[] dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var CarimageId = await _context.CarFileToApis
+                    .FirstOrDefaultAsync(x => x.CarExistingFilePath == dto.CarExistingFilePath);
+                var filePath = _webHost.WebRootPath + "\\multipleFileUpload\\" + CarimageId.CarExistingFilePath;
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                _context.CarFileToApis.Remove(CarimageId);
+                await _context.SaveChangesAsync();
+            }
+            return null;
+        }
+        public async Task<CarFileToApi> CarRemoveImageFromApi(CarFileToApiDto dto)
+        {
+            var imageId = await _context.CarFileToApis
+                .FirstOrDefaultAsync(x => x.CarExistingFilePath == dto.CarExistingFilePath);
+            var filePath = _webHost.WebRootPath + "\\multipleFileUpload\\" + imageId.CarExistingFilePath;
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            _context.CarFileToApis.Remove(imageId);
+            await _context.SaveChangesAsync();
+            return null;
+        }
+
+        Task IFilesServices.CarRemoveImagesFromApi(CarFileToApiDto[] images)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IFilesServices.CarRemoveImageFromApi(CarFileToApiDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
