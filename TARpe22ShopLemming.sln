@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TARpe22ShopLemming.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TARpe22ShopLemming.Data", "TARpe22ShopLemming.Data\TARpe22ShopLemming.Data.csproj", "{A9ECB7BF-F2AA-4AAB-B2BE-91125C63D829}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TARpe22ShopLemming.SpaceshipTest", "TARpe22ShopLemming.SpaceshipTest\TARpe22ShopLemming.SpaceshipTest.csproj", "{33BF2D9C-4C8E-40C1-937B-ADDA77E5F7AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TARpe22ShopLemming.SpaceshipTest", "TARpe22ShopLemming.SpaceshipTest\TARpe22ShopLemming.SpaceshipTest.csproj", "{33BF2D9C-4C8E-40C1-937B-ADDA77E5F7AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
