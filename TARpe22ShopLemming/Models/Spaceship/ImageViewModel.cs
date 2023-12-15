@@ -1,6 +1,6 @@
 ﻿namespace TARpe22ShopLemming.Models.Spaceship
 {
-    public class ImageViewModel
+    public class CarImageViewModel
     {
         public Guid ImageId { get; set; }
         public string ImageTitle { get; set; }

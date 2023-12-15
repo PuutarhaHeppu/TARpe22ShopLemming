@@ -23,7 +23,7 @@
         public DateTime MaidenLaunch { get; set; } //when did the ship take its first voyage
         public string Manufacturer { get; set; } //who manufactured the spaceship
         public List<IFormFile> Files { get; set; } //List of files to be added
-        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>(); //images
+        public List<CarImageViewModel> Image { get; set; } = new List<CarImageViewModel>(); //images
 
 
         //database info only, do not display to user

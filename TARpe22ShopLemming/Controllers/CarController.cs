@@ -4,6 +4,7 @@ using TARpe22ShopLemming.Core.Dto;
 using TARpe22ShopLemming.Core.ServiceInterface;
 using TARpe22ShopLemming.Data;
 using TARpe22ShopLemming.Models.Car;
+using TARpe22ShopLemming.Models.Spaceship;
 
 namespace TARpe22ShopLemming.Controllers
 {
@@ -184,26 +185,27 @@ namespace TARpe22ShopLemming.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
-            var Car = await _carsServices.Delete(id);
-            if (Car != null)
+            var carId = await _carsServices.Delete(id);
+            if (carId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(CarImageViewModel file)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                Id = file.ImageId
+            };
+            var image = await _filesServices.RemoveImage(dto);
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
         }
-        //[HttpPost]
-        //public async Task<IActionResult> RemoveImage(CarFileToApiViewModel vm)
-        //{
-        //    var dto = new CarFileToApiDto()
-        //    {
-        //        Id = vm.CarImageId
-        //    };
-        //    var image = await _filesServices.CarRemoveImageFromApi(dto);
-        //    if (image == null)
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
     }
 }
