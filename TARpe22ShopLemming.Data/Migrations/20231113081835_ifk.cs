@@ -10,7 +10,7 @@ namespace TARpe22ShopLemming.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FileToDatabases",
+                name: "FilesToDatabase",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -20,7 +20,7 @@ namespace TARpe22ShopLemming.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileToDatabases", x => x.Id);
+                    table.PrimaryKey("PK_FilesToDatabase", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,7 +118,7 @@ namespace TARpe22ShopLemming.Data.Migrations
                 name: "FileToApis");
 
             migrationBuilder.DropTable(
-                name: "FileToDatabases");
+                name: "FilesToDatabase");
 
             migrationBuilder.DropTable(
                 name: "Spaceships");

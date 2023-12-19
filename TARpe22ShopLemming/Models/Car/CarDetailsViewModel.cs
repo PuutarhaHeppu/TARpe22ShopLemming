@@ -1,4 +1,6 @@
-﻿namespace TARpe22ShopLemming.Models.Car
+﻿using TARpe22ShopLemming.Core.Dto;
+
+namespace TARpe22ShopLemming.Models.Car
 {
     public class CarDetailsViewModel
     {
@@ -8,7 +10,8 @@
         public int Year { get; set; }
         public int HorsePower { get; set; }
         public string Name { get; set; }
-        public List<CarFileToApiViewModel> CarFileToApiViewModels { get; set; } = new List<CarFileToApiViewModel>();
+        public List<CarImageViewModel> CarImageViewModels { get; set; } = new List<CarImageViewModel>();
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         // db only
         public DateTime CreatedAt { get; set; }

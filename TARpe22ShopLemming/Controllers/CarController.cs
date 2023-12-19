@@ -10,16 +10,20 @@ namespace TARpe22ShopLemming.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly ICarsServices _carsServices;
         private readonly TARpe22ShopLemmingContext _context;
+        private readonly ICarsServices _carsServices;
         private readonly IFilesServices _filesServices;
-        public CarsController(ICarsServices carsServices, TARpe22ShopLemmingContext context, IFilesServices filesServices)
+        public CarsController
+            (
+                TARpe22ShopLemmingContext context,
+                ICarsServices carsServices,
+                IFilesServices filesServices
+            )
         {
-            _carsServices = carsServices;
             _context = context;
+            _carsServices = carsServices;
             _filesServices = filesServices;
         }
-        [HttpGet]
         public IActionResult Index()
         {
             var result = _context.Cars
@@ -27,38 +31,39 @@ namespace TARpe22ShopLemming.Controllers
                 .Select(x => new CarIndexViewModel
                 {
                     Id = x.Id,
+                    Name = x.Name,
                     Mark = x.Mark,
                     Model = x.Model,
                     Year = x.Year,
                     HorsePower = x.HorsePower,
-                    Name = x.Name,
                 });
             return View(result);
         }
         [HttpGet]
         public IActionResult Create()
         {
-            CarCreateUpdateViewModel vm = new();
-            return View("CreateUpdate", vm);
+            CarCreateUpdateViewModel car = new CarCreateUpdateViewModel();
+            return View("CreateUpdate", car);
         }
         [HttpPost]
         public async Task<IActionResult> Create(CarCreateUpdateViewModel vm)
         {
             var dto = new CarDto()
             {
-                Id = Guid.NewGuid(),
-                Mark = vm.Mark,
-                Model = vm.Model,
-                Year = vm.Year,
-                HorsePower = vm.HorsePower,
+                Id = vm.Id,
                 Name = vm.Name,
-                CreatedAt = DateTime.Now,
-                ModifiedAt = DateTime.Now,
-                CarFileToApiDtos = vm.CarFileToApiViewModels
-                .Select(x => new CarFileToApiDto
+                HorsePower = vm.HorsePower,
+                Year = vm.Year,
+                Model = vm.Model,
+                Mark = vm.Mark,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
                 {
-                    Id = x.CarImageId,
-                    CarExistingFilePath = x.CarFilePath,
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
                     CarId = x.CarId,
                 }).ToArray()
             };
@@ -67,34 +72,38 @@ namespace TARpe22ShopLemming.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction("Index", vm);
 
+            return RedirectToAction(nameof(Index), vm);
         }
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var Car = await _carsServices.GetAsync(id);
-            if (Car == null)
+            var car = await _carsServices.GetAsync(id);
+            if (car == null)
             {
                 return NotFound();
             }
-            var images = await _context.CarFileToApis
+            var photos = await _context.FilesToDatabase
                 .Where(x => x.CarId == id)
-                .Select(y => new CarFileToApiViewModel
+                .Select(y => new CarImageViewModel
                 {
-                    CarFilePath = y.CarExistingFilePath,
-                    CarImageId = y.Id
+                    CarId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image.gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+
                 }).ToArrayAsync();
             var vm = new CarCreateUpdateViewModel();
-            vm.Id = Car.Id;
-            vm.Mark = vm.Mark;
-            vm.Model = vm.Model;
-            vm.Year = vm.Year;
-            vm.HorsePower = vm.HorsePower;
-            vm.Name = vm.Name;
-            vm.CreatedAt = Car.CreatedAt;
-            vm.ModifiedAt = DateTime.Now;
-            vm.CarFileToApiViewModels.AddRange(images);
+
+            vm.Id = car.Id;
+            vm.Name = car.Name;
+            vm.HorsePower = car.HorsePower;
+            vm.Year = car.Year;
+            vm.Model = car.Model;
+            vm.Mark = car.Mark;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
 
             return View("CreateUpdate", vm);
         }
@@ -103,19 +112,16 @@ namespace TARpe22ShopLemming.Controllers
         {
             var dto = new CarDto()
             {
-                Id = (Guid)vm.Id,
-                Mark = vm.Mark,
-                Model = vm.Model,
-                Year = vm.Year,
-                HorsePower = vm.HorsePower,
+                Id = vm.Id,
                 Name = vm.Name,
-                CreatedAt = DateTime.Now,
+                CreatedAt = vm.CreatedAt,
                 ModifiedAt = DateTime.Now,
-                CarFileToApiDtos = vm.CarFileToApiViewModels
-                .Select(x => new CarFileToApiDto
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
                 {
-                    Id = x.CarImageId,
-                    CarExistingFilePath = x.CarFilePath,
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
                     CarId = x.CarId,
                 }).ToArray()
             };
@@ -126,60 +132,70 @@ namespace TARpe22ShopLemming.Controllers
             }
             return RedirectToAction(nameof(Index), vm);
         }
+
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var Car = await _carsServices.GetAsync(id);
-            if (Car == null)
+
+            var car = await _carsServices.GetAsync(id);
+            if (car == null)
             {
                 return NotFound();
             }
-            var images = await _context.CarFileToApis
-            .Where(x => x.CarId == id)
-            .Select(y => new CarFileToApiViewModel
-            {
-                CarFilePath = y.CarExistingFilePath,
-                CarImageId = y.Id
-            }).ToArrayAsync();
-            var vm = new CarDetailsViewModel(); //todo: details viewmodel
-            vm.Id = Car.Id;
-            vm.Mark = Car.Mark;
-            vm.Model = Car.Model;
-            vm.Year = Car.Year;
-            vm.HorsePower = Car.HorsePower;
-            vm.Name = Car.Name;
-            vm.CreatedAt = Car.CreatedAt;
-            vm.ModifiedAt = Car.ModifiedAt;
-            vm.CarFileToApiViewModels.AddRange(images);
+            var photos = await _context.FilesToDatabase
+                .Where(x => x.CarId == id)
+                .Select(y => new CarImageViewModel
+                {
+                    CarId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+            var vm = new CarDetailsViewModel();
+
+            vm.Id = car.Id;
+            vm.Name = car.Name;
+            vm.HorsePower = car.HorsePower;
+            vm.Year = car.Year;
+            vm.Mark = car.Mark;
+            vm.Model = car.Model;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
 
             return View(vm);
         }
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var Car = await _carsServices.GetAsync(id);
 
-            if (Car == null)
+            var car = await _carsServices.GetAsync(id);
+            if (car == null)
             {
                 return NotFound();
             }
-            var images = await _context.CarFileToApis
-            .Where(x => x.CarId == id)
-            .Select(y => new CarFileToApiViewModel
-            {
-                CarFilePath = y.CarExistingFilePath,
-                CarImageId = y.Id
-            }).ToArrayAsync();
+            var photos = await _context.FilesToDatabase
+                .Where(x => x.CarId == id)
+                .Select(y => new CarImageViewModel
+                {
+                    CarId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+                }).ToArrayAsync();
+
             var vm = new CarDeleteViewModel();
-            vm.Id = Car.Id;
-            vm.Mark = Car.Mark;
-            vm.Model = Car.Model;
-            vm.Year = Car.Year;
-            vm.HorsePower = Car.HorsePower;
-            vm.Name = Car.Name;
-            vm.CreatedAt = Car.CreatedAt;
-            vm.ModifiedAt = Car.ModifiedAt;
-            vm.CarFileToApiViewModels.AddRange(images);
+
+            vm.Id = car.Id;
+            vm.Name = car.Name;
+            vm.HorsePower = car.HorsePower;
+            vm.Year = car.Year;
+            vm.Mark = car.Mark;
+            vm.Model = car.Model;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
+
             return View(vm);
         }
         [HttpPost]
@@ -194,7 +210,7 @@ namespace TARpe22ShopLemming.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public async Task<IActionResult> RemoveImage(CarImageViewModel file)
+        public async Task<IActionResult> RemoveImage(Models.Car.CarImageViewModel file)
         {
             var dto = new FileToDatabaseDto()
             {

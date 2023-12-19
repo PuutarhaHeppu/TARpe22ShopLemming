@@ -34,17 +34,17 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
                         photo.CopyTo(target);
                         files.ImageData = target.ToArray();
 
-                        _context.FileToDatabases.Add(files);
+                        _context.FilesToDatabase.Add(files);
                     }
                 }
             }
         }
         public async Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto)
         {
-            var image = await _context.FileToDatabases
+            var image = await _context.FilesToDatabase
                 .Where(x => x.Id == dto.Id)
                 .FirstOrDefaultAsync();
-            _context.FileToDatabases.Remove(image);
+            _context.FilesToDatabase.Remove(image);
             await _context.SaveChangesAsync();
             return image;
         }
@@ -52,10 +52,10 @@ namespace TARpe22ShopLemming.ApplicationServices.Services
         {
             foreach (var dto in dtos)
             {
-                var image = await _context.FileToDatabases
+                var image = await _context.FilesToDatabase
                     .Where(x => x.Id == dto.Id)
                     .FirstOrDefaultAsync();
-                _context.FileToDatabases.Remove(image);
+                _context.FilesToDatabase.Remove(image);
                 await _context.SaveChangesAsync();
             }
             return null;

@@ -63,7 +63,7 @@ namespace TARpe22ShopLemming.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToDatabases");
+                    b.ToTable("FilesToDatabase");
                 });
 
             modelBuilder.Entity("TARpe22ShopLemming.Core.Domain.RealEstate", b =>

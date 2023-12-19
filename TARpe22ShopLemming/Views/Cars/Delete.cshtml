@@ -33,7 +33,7 @@
             @Html.DisplayFor(model => model.ModifiedAt)
         </div>
 
-        @foreach (var images in Model.CarFileToApiViewModels)
+        @foreach (var images in Model.CarImageViewModels)
         {
             <partial name="_Images" model="images" />
         }

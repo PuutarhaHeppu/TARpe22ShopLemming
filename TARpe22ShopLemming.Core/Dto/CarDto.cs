@@ -16,7 +16,7 @@ namespace TARpe22ShopLemming.Core.Dto
         public int HorsePower { get; set; }
         public string Name { get; set; }
         public List<IFormFile> Files { get; set; }
-        public IEnumerable<CarFileToApiDto> CarFileToApiDtos { get; set; } = new List<CarFileToApiDto>();
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         // db only
         public DateTime CreatedAt { get; set; }

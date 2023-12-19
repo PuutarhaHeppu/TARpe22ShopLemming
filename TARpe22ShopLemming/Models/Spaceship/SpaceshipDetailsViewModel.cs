@@ -1,4 +1,6 @@
-﻿namespace TARpe22ShopLemming.Models.Spaceship
+﻿using TARpe22ShopLemming.Models.Car;
+
+namespace TARpe22ShopLemming.Models.Spaceship
 {
     public class SpaceshipDetailsViewModel
     {
@@ -22,7 +24,7 @@
         public int FullTripsCount { get; set; } //how many voyages the ship has gone through
         public DateTime MaidenLaunch { get; set; } //when did the ship take its first voyage
         public string Manufacturer { get; set; } //who manufactured the spaceship
-        public List<CarImageViewModel> Image { get; set; } = new List<CarImageViewModel>();
+        public List<ImageViewModel> Image { get; set; } = new List<ImageViewModel>();
 
 
         //database info only, do not display to user

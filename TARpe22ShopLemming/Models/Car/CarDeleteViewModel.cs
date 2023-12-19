@@ -8,7 +8,7 @@
         public int Year { get; set; }
         public int HorsePower { get; set; }
         public string Name { get; set; }
-        public List<CarFileToApiViewModel> CarFileToApiViewModels { get; set; } = new List<CarFileToApiViewModel>();
+        public List<CarImageViewModel> CarImageViewModels { get; set; } = new List<CarImageViewModel>();
 
         // db only
         public DateTime CreatedAt { get; set; }

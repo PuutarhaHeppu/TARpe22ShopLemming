@@ -1,4 +1,5 @@
-﻿using TARpe22ShopLemming.Models.RealEstate;
+﻿using TARpe22ShopLemming.Core.Dto;
+using TARpe22ShopLemming.Models.RealEstate;
 
 namespace TARpe22ShopLemming.Models.Car
 {
@@ -10,7 +11,9 @@ namespace TARpe22ShopLemming.Models.Car
         public int Year { get; set; }
         public int HorsePower { get; set; }
         public string Name { get; set; }
-        public List<CarFileToApiViewModel> CarFileToApiViewModels { get; set; } = new List<CarFileToApiViewModel>();
+        public List<CarImageViewModel> CarImageViewModels { get; set; } = new List<CarImageViewModel>();
+        public List<IFormFile> Files { get; set; } //List of files to be added
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         // db only
         public DateTime CreatedAt { get; set; }

@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        @foreach (var images in Model.CarFileToApiViewModels)
+        @foreach (var images in Model.CarImageViewModels)
         {
             <partial name="_Images" model="images"/>
             <input asp-action="removeImage" asp-controller="Cars" asp-route-imageId="@images.>CarImageId" type="submit" class="btn btn-danger" value="Remove Image"/>
